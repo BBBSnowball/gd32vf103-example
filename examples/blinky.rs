@@ -55,12 +55,12 @@ fn main() -> ! {
             .write(|w| w.ckout0sel().bits(0b1000));
     }
     loop {
-        pa1.set_high().unwrap();
+        pa1.try_set_high().unwrap();
         while unsafe { &(*pac::TIMER1::ptr()) }.intf.read().upif().bit() {}
         unsafe { &(*pac::TIMER1::ptr()) }
             .intf
             .write(|w| w.upif().clear_bit());
-        pa1.set_low().unwrap();
+        pa1.try_set_low().unwrap();
         while unsafe { &(*pac::TIMER1::ptr()) }.intf.read().upif().bit() {}
         unsafe { &(*pac::TIMER1::ptr()) }
             .intf
