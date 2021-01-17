@@ -12,7 +12,7 @@ publish = false
 gd32vf103-hal = { version = "*", path = "../gd32vf103-hal"}
 panic-halt = "0.2"
 riscv-rt = "0.8"
-nb = "0.1"
+nb = "1.0.0"
 
 [features]
 inline-asm = ["riscv-rt/inline-asm", "gd32vf103-hal/inline-asm"]
