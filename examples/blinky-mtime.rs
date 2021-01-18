@@ -22,23 +22,23 @@ fn main() -> ! {
         for _ in 0..10_000 {
             unsafe { asm!("nop") };
         }
-        pa2.set_low().unwrap();
-        pa1.set_high().unwrap();
+        pa2.try_set_low().unwrap();
+        pa1.try_set_high().unwrap();
         for _ in 0..10_000 {
             unsafe { asm!("nop") };
         }
-        pa1.set_low().unwrap();
-        pa2.set_low().unwrap();
+        pa1.try_set_low().unwrap();
+        pa2.try_set_low().unwrap();
         for _ in 0..10_000 {
             unsafe { asm!("nop") };
         }
-        pa1.set_low().unwrap();
-        pa2.set_high().unwrap();
+        pa1.try_set_low().unwrap();
+        pa2.try_set_high().unwrap();
         for _ in 0..10_000 {
             unsafe { asm!("nop") };
         }
-        pa1.set_low().unwrap();
-        pa2.set_low().unwrap();
+        pa1.try_set_low().unwrap();
+        pa2.try_set_low().unwrap();
     }
 }
 
