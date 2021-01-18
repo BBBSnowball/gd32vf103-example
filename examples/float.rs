@@ -1,4 +1,4 @@
-#![feature(asm, alloc_error_handler)]
+#![feature(asm, llvm_asm, alloc_error_handler)]
 #![no_std]
 #![no_main]
 
@@ -24,6 +24,6 @@ fn main() -> ! {
     let a = 2.33f32;
     let s = format!("{}", a);
     // uses variant `s` so it's not optimized out
-    unsafe { asm!(""::"r"(s.len())) };
+    unsafe { llvm_asm!(""::"r"(s.len())) };
     loop {}
 }

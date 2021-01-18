@@ -27,7 +27,7 @@ fn main() -> ! {
 
     loop {
         if bkp.tamper.check_event() {
-            pa7.toggle().ok();
+            pa7.try_toggle().ok();
             bkp.tamper.clear_event_bit();
         }
     }

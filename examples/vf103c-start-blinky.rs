@@ -25,7 +25,7 @@ fn main() -> ! {
     let ctimer = ctimer::CoreTimer::new(dp.CTIMER);
     let mut delay = delay::Delay::new(clocks, ctimer);
     loop {
-        pa7.toggle().unwrap();
-        delay.delay_ms(1000u32);
+        pa7.try_toggle().unwrap();
+        delay.try_delay_ms(1000u32).unwrap();
     }
 }

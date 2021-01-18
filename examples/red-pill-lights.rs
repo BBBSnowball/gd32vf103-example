@@ -15,6 +15,6 @@ fn main() -> ! {
     let mut rcu = dp.RCU.constrain();
     let mut gpioa = dp.GPIOA.split(&mut rcu.apb2);
     let mut pa1 = gpioa.pa1.into_push_pull_output(&mut gpioa.ctl0);
-    pa1.set_low().unwrap();
+    pa1.try_set_low().unwrap();
     loop {}
 }

@@ -49,8 +49,8 @@ fn main() -> ! {
         if state == 0 {
             write!(serial, "> ").ok();
         }
-        let ch = block!(serial.read()).unwrap();
-        block!(serial.write(ch)).ok();
+        let ch = block!(serial.try_read()).unwrap();
+        block!(serial.try_write(ch)).ok();
         match (state, ch) {
             (0, b'x') => state = 10,
             (10, b'\r') | (10, b'\n') => {

@@ -34,13 +34,13 @@ fn main() -> ! {
     
     loop {
         // Receive a byte from the USART and store it in "received"
-        let mut received = block!(serial.read()).unwrap();  
+        let mut received = block!(serial.try_read()).unwrap();  
         if received >= b'a' && received <= b'z' {
             received -= b'a' - b'A';
         } else if received >= b'A' && received <= b'Z' {
             received += b'a' - b'A';
         } 
         // Write to the USART
-        block!(serial.write(received)).ok();
+        block!(serial.try_write(received)).ok();
     }
 }

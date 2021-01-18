@@ -45,6 +45,6 @@ fn main() -> ! {
             flash_density(), 
             sram_density()
         ).ok();
-        delay.delay_ms(1000u32);
+        delay.try_delay_ms(1000u32).unwrap();
     }
 }

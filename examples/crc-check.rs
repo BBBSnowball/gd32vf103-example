@@ -13,7 +13,11 @@ fn main() -> ! {
     let dp = pac::Peripherals::take().unwrap();
     let mut rcu = dp.RCU.constrain();
     let mut gpioa = dp.GPIOA.split(&mut rcu.apb2);
-    let mut pa1 = gpioa.pa1.into_push_pull_output(&mut gpioa.ctl0);
+    let mut gpioc = dp.GPIOC.split(&mut rcu.apb2);
+    let mut green = gpioa.pa1.into_push_pull_output(&mut gpioa.ctl0);
+    let mut red = gpioc.pc13.into_push_pull_output(&mut gpioc.ctl1);
+    green.try_set_low().unwrap();
+    red.try_set_low().unwrap();
 
     let src: u32 = 0xABCD1234;
     let crc = Crc::crc(dp.CRC, &mut rcu.ahb);
@@ -21,7 +25,11 @@ fn main() -> ! {
     digest.write_u32(src);
 
     if digest.finish() == 0xF7018A40 {
-        pa1.set_low().unwrap();
+        green.try_set_low().unwrap();
+        red.try_set_high().unwrap();
+    } else {
+        green.try_set_high().unwrap();
+        red.try_set_low().unwrap();
     }
 
     loop {}

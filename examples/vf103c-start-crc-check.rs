@@ -22,7 +22,7 @@ fn main() -> ! {
     digest.write_u32(src);
 
     if digest.finish() == 0xF7018A40 {
-        pa7.set_high().unwrap();
+        pa7.try_set_high().unwrap();
     }
 
     loop {}
