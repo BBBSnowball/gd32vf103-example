@@ -19,6 +19,9 @@ fn main() -> ! {
         (*pac::RCU::ptr())
             .apb1rst
             .write(|w| w.timer1rst().set_bit());
+        (*pac::RCU::ptr())
+            .apb1rst
+            .write(|w| w.timer1rst().clear_bit());
 
         (*pac::TIMER1::ptr()).ctl0.write(|w| w.cen().clear_bit());
 
@@ -56,12 +59,12 @@ fn main() -> ! {
     }
     loop {
         pa1.try_set_high().unwrap();
-        while unsafe { &(*pac::TIMER1::ptr()) }.intf.read().upif().bit() {}
+        while ! unsafe { &(*pac::TIMER1::ptr()) }.intf.read().upif().bit() {}
         unsafe { &(*pac::TIMER1::ptr()) }
             .intf
             .write(|w| w.upif().clear_bit());
         pa1.try_set_low().unwrap();
-        while unsafe { &(*pac::TIMER1::ptr()) }.intf.read().upif().bit() {}
+        while ! unsafe { &(*pac::TIMER1::ptr()) }.intf.read().upif().bit() {}
         unsafe { &(*pac::TIMER1::ptr()) }
             .intf
             .write(|w| w.upif().clear_bit());
