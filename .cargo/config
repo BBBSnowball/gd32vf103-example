@@ -4,6 +4,9 @@ rustflags = [
   "-C", "link-arg=-Tlink.x",
   #"-C", "linker=riscv32-none-elf-gcc",
   "-C", "linker=lld",
+  #"-C", "link-arg=--lto-O2",
+  #"-C", "lto",
+  #"-C", "linker-plugin-lto",
 ]
 runner = "riscv64-unknown-elf-gdb -q -x openocd.gdb"
 # runner = "riscv32-unknown-elf-gdb -q -x openocd.gdb"
