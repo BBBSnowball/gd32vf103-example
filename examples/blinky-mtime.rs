@@ -19,26 +19,24 @@ fn main() -> ! {
     let mut pa2 = gpioa.pa2.into_push_pull_output(&mut gpioa.ctl0);
     // let mut pc13 = gpioc.pc13.into_push_pull_output(&mut gpioc.ctl1);
     loop {
-        for _ in 0..10_000 {
-            unsafe { asm!("nop") };
-        }
+        delay();
         pa2.try_set_low().unwrap();
         pa1.try_set_high().unwrap();
-        for _ in 0..10_000 {
-            unsafe { asm!("nop") };
-        }
+        delay();
         pa1.try_set_low().unwrap();
         pa2.try_set_low().unwrap();
-        for _ in 0..10_000 {
-            unsafe { asm!("nop") };
-        }
+        delay();
         pa1.try_set_low().unwrap();
         pa2.try_set_high().unwrap();
-        for _ in 0..10_000 {
-            unsafe { asm!("nop") };
-        }
+        delay();
         pa1.try_set_low().unwrap();
         pa2.try_set_low().unwrap();
+    }
+}
+
+fn delay() {
+    for _ in 0..1_000_000 {
+        unsafe { asm!("nop") };
     }
 }
 
